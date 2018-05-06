@@ -12,7 +12,6 @@ import javax.persistence.Id;
  * Created by miller on 2018/5/5
  */
 @Entity
-@DynamicUpdate
 @Data   //自动生成getter setter toString
 public class ProductCategory {
     /* 类目Id*/

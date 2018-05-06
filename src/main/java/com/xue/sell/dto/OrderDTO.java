@@ -1,26 +1,19 @@
-package com.xue.sell.pojo;
+package com.xue.sell.dto;
 
 import com.xue.sell.enums.OrderStatusEnum;
 import com.xue.sell.enums.PayStatusEnum;
+import com.xue.sell.pojo.OrderDetail;
 import lombok.Data;
-import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by miller on 2018/5/5
+ * Created by miller on 2018/5/6
  */
-@Entity
 @Data
-@DynamicUpdate
-public class OrderMaster {
-    /* 订单Id */
-    @Id
+public class OrderDTO {
     private String orderId;
 
     /* 买家名字 */
@@ -39,14 +32,16 @@ public class OrderMaster {
     private BigDecimal orderAmount;
 
     /*订单状态 默认为新下单*/
-    private Integer orderStatus = OrderStatusEnum.NEW.getCode();
+    private Integer orderStatus;
 
     /* 支付状态, 默认0未支付*/
-    private Integer payStatus = PayStatusEnum.WAIT.getCode();
+    private Integer payStatus;
 
     /* 创建时间 */
     private Date createTime;
 
     /* 更新时间 */
     private Date updateTime;
+
+    List<OrderDetail> orderDetailList;
 }
