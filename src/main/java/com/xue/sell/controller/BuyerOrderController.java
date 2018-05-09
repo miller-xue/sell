@@ -87,7 +87,6 @@ public class BuyerOrderController {
             log.error("【查询订单详情】 orderId为空");
             throw new SellException(ResultEnum.PARAM_ERROR);
         }
-        //TODO 不安全的做法,改进
         OrderDTO result = buyerService.findOrderOne(openid,orderId);
         return ResultVOUtil.success(result);
     }
@@ -105,8 +104,7 @@ public class BuyerOrderController {
             log.error("【查询订单详情】 orderId为空");
             throw new SellException(ResultEnum.PARAM_ERROR);
         }
-        //TODO 不安全的做法,改进
-        OrderDTO orderDTO = buyerService.cancelOrder(openid,orderId);
+        buyerService.cancelOrder(openid,orderId);
         return ResultVOUtil.success();
     }
 }

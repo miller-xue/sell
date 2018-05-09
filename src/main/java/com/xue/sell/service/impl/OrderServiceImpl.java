@@ -119,15 +119,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
-    public OrderDTO cancel(String orderId){
-        OrderDTO orderDTO = findOne(orderId);
-        if(orderDTO == null){
-            throw new OrderException(ResultEnum.ORDER_NOT_EXIST);
-        }
-        return cancel(orderDTO);
-    }
-
-    //TODO 存在的问题是前端传几个订单详情就减几个订单详情购买数量
     @Override
     @Transactional
     public OrderDTO cancel(OrderDTO orderDTO) {
@@ -150,11 +141,12 @@ public class OrderServiceImpl implements OrderService {
             throw new OrderException(ResultEnum.ORDER_UPDATE_FAIL);
         }
         //3.返回库存
+        // 创建订单时,订单内必须有商品。Controller层会判断校验  OrderDTO是根据OrderId查询出来的。
         //3.1判断订单是否有商品
-        if(CollectionUtils.isEmpty(orderDTO.getOrderDetailList())){
-            log.error("【取消订单】 订单中无商品详情 orderDTO={}",orderDTO);
-            throw new OrderException(ResultEnum.ORDER_DETAIL_EMPTY);
-        }
+//        if(CollectionUtils.isEmpty(orderDTO.getOrderDetailList())){
+//            log.error("【取消订单】 订单中无商品详情 orderDTO={}",orderDTO);
+//            throw new OrderException(ResultEnum.ORDER_DETAIL_EMPTY);
+//        }
         List<CartDTO> cartDTOList = orderDTO.getOrderDetailList().stream().map( e ->
                         new CartDTO(e.getProductId(),e.getProductQuantity()))
                         .collect(Collectors.toList());

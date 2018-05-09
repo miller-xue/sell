@@ -18,9 +18,6 @@ public interface OrderService {
     /* 查询订单列表 */
     Page<OrderDTO> findList(String buyerOpenid, Pageable pageable);
 
-    /* 根据id取消订单 */
-    public OrderDTO cancel(String orderId);
-
     /* 取消订单 */
     OrderDTO cancel(OrderDTO orderDTO);
 
