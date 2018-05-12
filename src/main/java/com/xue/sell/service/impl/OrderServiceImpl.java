@@ -15,6 +15,7 @@ import com.xue.sell.pojo.ProductInfo;
 import com.xue.sell.repository.OrderDetailRepository;
 import com.xue.sell.repository.OrderMasterRepository;
 import com.xue.sell.service.OrderService;
+import com.xue.sell.service.PayService;
 import com.xue.sell.service.ProductInfoService;
 import com.xue.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +48,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderDetailRepository orderDetailRepository;
+
+    @Autowired
+    PayService payService;
 
     @Override
     @Transactional
@@ -154,7 +158,7 @@ public class OrderServiceImpl implements OrderService {
 
         //4.如果已支付给用户退款
         if(orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())){
-            //TODO 退款
+            payService.refund(orderDTO);
         }
         return orderDTO;
     }

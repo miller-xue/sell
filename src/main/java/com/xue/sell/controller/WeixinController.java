@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by miller on 2018/5/9
  */
+@Deprecated
 @RestController
 @Slf4j
 @RequestMapping("/weixin")

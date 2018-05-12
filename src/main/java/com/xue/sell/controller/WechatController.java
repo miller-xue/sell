@@ -9,10 +9,7 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sun.misc.Cache;
 
 import java.net.URLEncoder;
@@ -33,7 +30,7 @@ public class WechatController {
         //1. 配置
 
         //2. 调用方法
-        String url = "";
+        String url = "http://hzbrpq.natappfree.cc/sell/wechat/userInfo";
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, URLEncoder.encode(returnUrl));
         log.info("【微信网页授权】 获取code, redirectUrl={}",redirectUrl);
         return  "redirect:"+redirectUrl;
@@ -41,6 +38,7 @@ public class WechatController {
 
 
     @GetMapping("/userInfo")
+//    @ResponseBody
     private String  userInfo(@RequestParam("code") String code,
                             @RequestParam("state") String returnUrl){
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken = null;
@@ -50,8 +48,10 @@ public class WechatController {
             log.error("【微信网页授权】 {}",e);
             throw new WechatException(ResultEnum.WECHAT_MP_ERROR.getCode(),e.getError().getErrorMsg());
         }
+            log.info("【微信网页授权】 result={}",wxMpOAuth2AccessToken);
         String openId = wxMpOAuth2AccessToken.getOpenId();
-        return "redirect:" + returnUrl + "openid=" + openId;
+        return "redirect:" + returnUrl + "?openid=" + openId;
+//        return openId;
     }
 
 }

@@ -29,7 +29,9 @@ public enum ResultEnum {
 
     CART_EMPTY(18,"购物车不能为空"),
 
-    WECHAT_MP_ERROR(20,"微信公众账号方面错误")
+    WECHAT_MP_ERROR(20,"微信公众账号方面错误"),
+
+    WECHAT_PAY_NOTIFY_VERIFY_ERROR(21,"微信支付异步通知金额校验不通过")
     ;
 
     private Integer code;
