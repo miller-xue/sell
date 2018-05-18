@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * Created by miller on 2018/5/6
  */
-public class OrderMasterToOrderDTOConverter {
+public class OrderMaster2OrderDTOConverter {
 
     public static OrderDTO convert(OrderMaster orderMaster){
         OrderDTO orderDTO = new OrderDTO();

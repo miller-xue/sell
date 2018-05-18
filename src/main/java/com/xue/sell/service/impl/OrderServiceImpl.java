@@ -1,6 +1,6 @@
 package com.xue.sell.service.impl;
 
-import com.xue.sell.converter.OrderMasterToOrderDTOConverter;
+import com.xue.sell.converter.OrderMaster2OrderDTOConverter;
 import com.xue.sell.dto.CartDTO;
 import com.xue.sell.dto.OrderDTO;
 import com.xue.sell.enums.OrderStatusEnum;
@@ -8,7 +8,6 @@ import com.xue.sell.enums.PayStatusEnum;
 import com.xue.sell.enums.ResultEnum;
 import com.xue.sell.exception.OrderException;
 import com.xue.sell.exception.ProductException;
-import com.xue.sell.exception.SellException;
 import com.xue.sell.pojo.OrderDetail;
 import com.xue.sell.pojo.OrderMaster;
 import com.xue.sell.pojo.ProductInfo;
@@ -98,7 +97,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDTO findOne(String orderId) {
+    public OrderDTO findOne(String orderId)throws OrderException {
         OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
         if(orderMaster == null){
             throw  new OrderException(ResultEnum.ORDER_NOT_EXIST);
@@ -118,14 +117,14 @@ public class OrderServiceImpl implements OrderService {
     public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable) {
         Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid, pageable);
         //前端查询的结果不需要列表详情
-        List<OrderDTO> orderDTOList = OrderMasterToOrderDTOConverter.convert(orderMasterPage.getContent());
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
         return new PageImpl<OrderDTO>(orderDTOList,pageable,orderMasterPage.getTotalPages());
     }
 
 
     @Override
     @Transactional
-    public OrderDTO cancel(OrderDTO orderDTO) {
+    public OrderDTO cancel(OrderDTO orderDTO)throws OrderException,ProductException {
 
         //1.判断订单状态
         if(!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())){
@@ -146,11 +145,12 @@ public class OrderServiceImpl implements OrderService {
         }
         //3.返回库存
         // 创建订单时,订单内必须有商品。Controller层会判断校验  OrderDTO是根据OrderId查询出来的。
-        //3.1判断订单是否有商品
-//        if(CollectionUtils.isEmpty(orderDTO.getOrderDetailList())){
-//            log.error("【取消订单】 订单中无商品详情 orderDTO={}",orderDTO);
-//            throw new OrderException(ResultEnum.ORDER_DETAIL_EMPTY);
-//        }
+
+        /*3.1判断订单是否有商品
+        if(CollectionUtils.isEmpty(orderDTO.getOrderDetailList())){
+            log.error("【取消订单】 订单中无商品详情 orderDTO={}",orderDTO);
+            throw new OrderException(ResultEnum.ORDER_DETAIL_EMPTY);
+        }*/
         List<CartDTO> cartDTOList = orderDTO.getOrderDetailList().stream().map( e ->
                         new CartDTO(e.getProductId(),e.getProductQuantity()))
                         .collect(Collectors.toList());
@@ -158,7 +158,7 @@ public class OrderServiceImpl implements OrderService {
 
         //4.如果已支付给用户退款
         if(orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())){
-            payService.refund(orderDTO);
+//            payService.refund(orderDTO);
         }
         return orderDTO;
     }
@@ -213,7 +213,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Page<OrderDTO> findList(Pageable pageable) {
         Page orderMasterPage = orderMasterRepository.findAll(pageable);
-        List<OrderDTO> orderDTOList = OrderMasterToOrderDTOConverter.convert(orderMasterPage.getContent());
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
         return new PageImpl<OrderDTO>(orderDTOList,pageable,orderMasterPage.getTotalPages());
     }
 }
