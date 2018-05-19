@@ -1,6 +1,6 @@
 package com.xue.sell.service.impl;
 
-import com.xue.sell.enums.ProductStatus;
+import com.xue.sell.enums.ProductStatusEnum;
 import com.xue.sell.pojo.ProductInfo;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,8 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by miller on 2018/5/5
@@ -58,10 +56,26 @@ public class ProductInfoServiceImplTest {
         productInfo.setProductStock(100);
         productInfo.setProductDescription("很好吃的虾");
         productInfo.setProductIcon("http://dwad.jpg");
-        productInfo.setProductStatus(ProductStatus.DOWN.getCode());
+        productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
         productInfo.setCategoryType(1);
 
         ProductInfo result = service.save(productInfo);
         Assert.assertNotNull(result);
     }
+
+    @Test
+    @Transactional
+    public void offSale(){
+        ProductInfo productInfo = service.offSale("123456");
+        Assert.assertTrue("下架成功",productInfo.getProductStatusEnum() == ProductStatusEnum.DOWN);
+    }
+
+    @Test
+    @Transactional
+    public void onSale(){
+        ProductInfo productInfo = service.onSale("123456");
+        Assert.assertTrue("上架成功",productInfo.getProductStatusEnum() == ProductStatusEnum.UP);
+    }
+
+
 }
