@@ -1,5 +1,6 @@
 package com.xue.sell.controller;
 
+import com.xue.sell.enums.ProductStatusEnum;
 import com.xue.sell.enums.ResultEnum;
 import com.xue.sell.exception.ProductException;
 import com.xue.sell.form.ProductForm;
@@ -7,6 +8,7 @@ import com.xue.sell.pojo.ProductCategory;
 import com.xue.sell.pojo.ProductInfo;
 import com.xue.sell.service.ProductCategoryService;
 import com.xue.sell.service.ProductInfoService;
+import com.xue.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -124,17 +126,25 @@ public class SellerProductController {
     public String save(@Valid ProductForm productForm,
                        BindingResult bindingResult,
                        Model model) {
+
         if(bindingResult.hasErrors()){
             model.addAttribute("msg",bindingResult.getFieldError().getDefaultMessage());
             model.addAttribute("url", "/sell/seller/product/index");
             return "common/error";
         }
-        productInfoService.findOne(productForm.getProductId());
-
-        ProductInfo productInfo = new ProductInfo();
-        BeanUtils.copyProperties(productForm,productInfo);
+        ProductInfo productInfo = null;
         try {
-           ProductInfo result = productInfoService.save(productInfo);
+            //  修改
+            if(StringUtils.isNotEmpty(productForm.getProductId())){
+                productInfo = productInfoService.findOne(productForm.getProductId());
+                BeanUtils.copyProperties(productForm,productInfo);
+            }else {
+                productInfo = new ProductInfo();
+                BeanUtils.copyProperties(productForm,productInfo);
+                productInfo.setProductId(KeyUtil.getUniqueKey());
+            }
+
+            productInfoService.save(productInfo);
         }catch (Exception e){
             model.addAttribute("msg", ResultEnum.ERROR.getMessage());
             model.addAttribute("url", "/sell/seller/product/index");

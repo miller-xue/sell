@@ -40,7 +40,7 @@
                                     <td>${product.createTime}</td>
                                     <td>${product.updateTime}</td>
                                     <td>
-                                        <a href="/sell/seller/order/detail/${product.productId}">修改</a>
+                                        <a href="/sell/seller/product/index?productId=${product.productId}">修改</a>
                                     </td>
                                     <td>
                                         <#if product.getProductStatusEnum().message == "在架">
