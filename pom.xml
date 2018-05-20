@@ -57,7 +57,7 @@
 			<artifactId>gson</artifactId>
 		</dependency>
 
-		<!-- 获取openid sdk -->
+		<!-- 微信mp平台 sdk -->
 		<dependency>
 			<groupId>com.github.binarywang</groupId>
 			<artifactId>weixin-java-mp</artifactId>

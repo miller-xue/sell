@@ -21,8 +21,8 @@ public class WechatPayConfig {
     /* 生成配置对象 */
     public WxPayH5Config wechatPayConfig(){
         WxPayH5Config config = new WxPayH5Config();
-        config.setAppId(accountConfig.getAppId());
-        config.setAppSecret(accountConfig.getAppSecret());
+        config.setAppId(accountConfig.getMpAppId());
+        config.setAppSecret(accountConfig.getMpAppSecret());
         config.setKeyPath(accountConfig.getKeyPath());
         config.setMchId(accountConfig.getMchId());
         config.setMchKey(accountConfig.getMchKey());

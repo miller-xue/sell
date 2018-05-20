@@ -1,5 +1,9 @@
 package com.xue.sell.service.impl;
 
+import com.xue.sell.enums.ResultEnum;
+import com.xue.sell.exception.CategoryException;
+import com.xue.sell.exception.ProductException;
+import com.xue.sell.exception.SellException;
 import com.xue.sell.pojo.ProductCategory;
 import com.xue.sell.repository.ProductCategoryRepository;
 import com.xue.sell.service.ProductCategoryService;
@@ -34,6 +38,12 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Override
     public ProductCategory save(ProductCategory productCategory) {
-        return repository.save(productCategory);
+        ProductCategory result = null;
+        try {
+            result = repository.save(productCategory);
+        }catch (Exception e){
+            throw new CategoryException(ResultEnum.INNER_ERROR);
+        }
+        return result;
     }
 }

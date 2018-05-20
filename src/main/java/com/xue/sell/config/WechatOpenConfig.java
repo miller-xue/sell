@@ -9,30 +9,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 /**
- * 获取openid配置
- * Created by miller on 2018/5/9
+ * 微信开放
+ * Created by miller on 2018/5/20
  */
 @Component
-public class WechatMpConfig {
+public class WechatOpenConfig {
 
     @Autowired
-    WechatAccountConfig accountConfig;
+    private WechatAccountConfig accountConfig;
 
-    /**
-     * 微信公众帐户服务给spring管理
-     * @return
-     */
     @Bean
-    public WxMpService wxMpService(){
-        WxMpService wxMpService = new WxMpServiceImpl();
-        wxMpService.setWxMpConfigStorage(wxMpConfigStorage());
-        return wxMpService;
+    public WxMpService wxOpenService(){
+        WxMpService wxOpenService = new WxMpServiceImpl();
+        wxOpenService.setWxMpConfigStorage(wxMpConfigStorage());
+        return wxOpenService;
     }
 
     public WxMpConfigStorage wxMpConfigStorage(){
         WxMpInMemoryConfigStorage wxMpConfigStorage = new WxMpInMemoryConfigStorage();
-        wxMpConfigStorage.setAppId(accountConfig.getMpAppId());
-        wxMpConfigStorage.setSecret(accountConfig.getMpAppSecret());
+        wxMpConfigStorage.setAppId(accountConfig.getOpenAppId());
+        wxMpConfigStorage.setSecret(accountConfig.getOpenAppSecret());
         return wxMpConfigStorage;
     }
+
 }

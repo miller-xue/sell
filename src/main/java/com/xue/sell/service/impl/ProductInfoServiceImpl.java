@@ -41,6 +41,12 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
     @Override
     public ProductInfo save(ProductInfo productInfo) {
+        ProductInfo result = null;
+        try {
+            result = repository.save(productInfo);
+        }catch (Exception e){//TODO 异常的抛出
+            throw new ProductException(ResultEnum.INNER_ERROR);
+        }
         return repository.save(productInfo);
     }
 

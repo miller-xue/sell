@@ -12,9 +12,16 @@ server:
   context-path: /sell
 
 wechat:
-  appId: wxcee54310cc1ea263
-  appSecret: 0368320d1e22b690a490ea3d9914fa4b
+  mpAppId: wxcee54310cc1ea263
+  mpAppSecret: 0368320d1e22b690a490ea3d9914fa4b
+  openAppId: wxcee54310cc1ea263
+  openAppSecret: 0368320d1e22b690a490ea3d9914fa4b
   mchId: 231
   mchKey: 213
   keyPath: 213
   notifyUrl: http:/dwadxxx.com.xxx/sell/pay/notify
+
+projectUrl:
+  wechatMpAuthorize: 548993.natappfree.cc
+  wechatOpenAuthorize: 548993.natappfree.cc
+  sell:

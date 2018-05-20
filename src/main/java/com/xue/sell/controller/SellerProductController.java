@@ -145,8 +145,8 @@ public class SellerProductController {
             }
 
             productInfoService.save(productInfo);
-        }catch (Exception e){
-            model.addAttribute("msg", ResultEnum.ERROR.getMessage());
+        }catch (ProductException e){// TODO 异常的捕获
+            model.addAttribute("msg", e.getMessage());
             model.addAttribute("url", "/sell/seller/product/index");
             return "common/error";
         }

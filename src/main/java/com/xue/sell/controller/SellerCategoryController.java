@@ -2,6 +2,8 @@ package com.xue.sell.controller;
 
 import com.lly835.bestpay.rest.type.Get;
 import com.xue.sell.enums.ResultEnum;
+import com.xue.sell.exception.CategoryException;
+import com.xue.sell.exception.ProductException;
 import com.xue.sell.form.CategoryForm;
 import com.xue.sell.pojo.ProductCategory;
 import com.xue.sell.service.ProductCategoryService;
@@ -71,8 +73,9 @@ public class SellerCategoryController {
             }
             BeanUtils.copyProperties(form,category);
             categoryService.save(category);
-        }catch (Exception e){
-            model.addAttribute("msg", ResultEnum.ERROR.getMessage());
+        }catch (CategoryException e){// TODO 只能捕捉异常
+
+            model.addAttribute("msg", e.getMessage());
             model.addAttribute("url", "/sell/seller/category/index");
             return "common/error";
         }

@@ -7,7 +7,7 @@ import lombok.Getter;
  */
 @Getter
 public enum ResultEnum {
-    ERROR(-1, "失败"),
+    INNER_ERROR(-1, "系统错误"),
 
     SUCCESS(0, "成功"),
 
@@ -41,7 +41,8 @@ public enum ResultEnum {
 
     ORDER_FINISH_SUCCESS(23, "订单完结成功"),
 
-    PRODUCT_STATUS_ERROR(24, "商品状态不正确"),;
+    PRODUCT_STATUS_ERROR(24, "商品状态不正确"),
+    WECHAT_OPEN_ERROR(20, "微信开放平台账号方面错误");
 
     private Integer code;
 
