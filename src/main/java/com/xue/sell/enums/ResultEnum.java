@@ -42,7 +42,12 @@ public enum ResultEnum {
     ORDER_FINISH_SUCCESS(23, "订单完结成功"),
 
     PRODUCT_STATUS_ERROR(24, "商品状态不正确"),
-    WECHAT_OPEN_ERROR(20, "微信开放平台账号方面错误");
+
+    WECHAT_OPEN_ERROR(25, "微信开放平台账号方面错误"),
+
+    LOGIN_FAIL(26,"登陆失败,登陆信息不正确"),
+    LOGOUT_SUCCESS(27,"登出成功")
+    ;
 
     private Integer code;
 

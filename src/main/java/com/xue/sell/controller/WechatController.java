@@ -43,7 +43,6 @@ public class WechatController {
 
 
     @GetMapping("/userInfo")
-//    @ResponseBody
     public String userInfo(@RequestParam("code") String code,
                             @RequestParam("state") String returnUrl) {
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken = null;
@@ -54,9 +53,9 @@ public class WechatController {
             throw new WechatException(ResultEnum.WECHAT_MP_ERROR.getCode(), e.getError().getErrorMsg());
         }
         log.info("【微信网页授权】 result={}", wxMpOAuth2AccessToken);
+
         String openId = wxMpOAuth2AccessToken.getOpenId();
         return "redirect:" + returnUrl + "?openid=" + openId;
-//        return openId;
     }
 
     @GetMapping("/qrAuthorize")
@@ -72,7 +71,7 @@ public class WechatController {
                            @RequestParam("state") String returnUrl){
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken = null;
         try {
-            wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
+            wxMpOAuth2AccessToken = wxOpenService.oauth2getAccessToken(code);
         } catch (WxErrorException e) {
             log.error("【微信网页登陆】 {}", e);
             throw new WechatException(ResultEnum.WECHAT_OPEN_ERROR.getCode(), e.getError().getErrorMsg());

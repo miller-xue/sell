@@ -8,9 +8,12 @@ spring:
     show-sql: true
   jackson:
     default-property-inclusion: non_null
+  redis:
+    host: 192.168.163.138
+    port: 6379
+
 server:
   context-path: /sell
-
 wechat:
   mpAppId: wxcee54310cc1ea263
   mpAppSecret: 0368320d1e22b690a490ea3d9914fa4b
@@ -22,6 +25,7 @@ wechat:
   notifyUrl: http:/dwadxxx.com.xxx/sell/pay/notify
 
 projectUrl:
-  wechatMpAuthorize: 548993.natappfree.cc
-  wechatOpenAuthorize: 548993.natappfree.cc
-  sell:
+  wechatMpAuthorize: http://fibkij.natappfree.cc
+  wechatOpenAuthorize: http://fibkij.natappfree.cc
+  sell: http://fibkij.natappfree.cc/sell
+
