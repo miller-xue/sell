@@ -1,4 +1,4 @@
-package com.xue.sell.Constant;
+package com.xue.sell.constant;
 
 /**
  * cookie常量

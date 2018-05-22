@@ -15,11 +15,14 @@ public class SellExceptionHandler {
     private ProjectUrlConfig urlConfig;
 
     //拦截登陆异常
-    /*@ExceptionHandler(value = SellerAuthorizeException.class)
+    @ExceptionHandler(value = SellerAuthorizeException.class)
     public String handlerAuthorizedException(){
         return "redirect:"
+                .concat(urlConfig.getWechatOpenAuthorize()) //TODO 跳转到授权页面
+                .concat("/wechat/qrAuthorize")
+                .concat("?returnUrl=")
                 .concat(urlConfig.getSell())
-                .concat("/");//TODO 跳转到授权页面
-    }*/
+                .concat("/seller/order/list");
+    }
 
 }

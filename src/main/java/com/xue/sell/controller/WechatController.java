@@ -31,6 +31,10 @@ public class WechatController {
     @Autowired
     private ProjectUrlConfig projectUrlConfig;
 
+    /**
+     * @param returnUrl l必须是绝对地址或，本项目的地址
+     * @return
+     */
     @GetMapping("/authorize")
     public String authorize(@RequestParam("returnUrl") String returnUrl) {
         //2. 调用方法

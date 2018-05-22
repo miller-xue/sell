@@ -4,6 +4,8 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 /**
  * 微信帐户配置
  * Created by miller on 2018/5/9
@@ -52,4 +54,9 @@ public class WechatAccountConfig {
      * 微信支付异步通地址
      */
     private String notifyUrl;
+
+    /**
+     * 微信模板Id
+     */
+    private Map<String,String> templateId;
 }

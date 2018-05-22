@@ -1,9 +1,5 @@
 package com.xue.sell.aspect;
 
-import com.xue.sell.Constant.CookieConstant;
-import com.xue.sell.Constant.RedisConstant;
-import com.xue.sell.exception.SellerAuthorizeException;
-import com.xue.sell.utils.CookieUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -11,12 +7,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by miller on 2018/5/21

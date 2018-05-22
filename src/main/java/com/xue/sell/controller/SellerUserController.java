@@ -1,7 +1,7 @@
 package com.xue.sell.controller;
 
-import com.xue.sell.Constant.CookieConstant;
-import com.xue.sell.Constant.RedisConstant;
+import com.xue.sell.constant.CookieConstant;
+import com.xue.sell.constant.RedisConstant;
 import com.xue.sell.config.ProjectUrlConfig;
 import com.xue.sell.enums.ResultEnum;
 import com.xue.sell.pojo.SellerInfo;
@@ -59,7 +59,7 @@ public class SellerUserController {
 
         // 3. 设置token到cookie
         CookieUtil.set(response, CookieConstant.TOKEN,token,CookieConstant.EXPIRE);
-        return "redirect:" + urlConfig.getSell() + "/seller/product/list";
+        return "redirect:" + urlConfig.getSell() + "/seller/product/list"; //绝对地址
     }
 
 
@@ -76,7 +76,7 @@ public class SellerUserController {
             CookieUtil.set(response,CookieConstant.TOKEN,null,0); //把cookie设置0值为null
         }
         model.addAttribute("msg",ResultEnum.LOGOUT_SUCCESS.getMessage());
-        model.addAttribute("url","/sell/seller/order/list");
+        model.addAttribute("url","/sell/seller/order/list"); //相对地址
         return "common/success";
 
     }

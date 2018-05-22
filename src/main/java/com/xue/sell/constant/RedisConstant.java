@@ -1,4 +1,4 @@
-package com.xue.sell.Constant;
+package com.xue.sell.constant;
 
 /**
  * redis常量

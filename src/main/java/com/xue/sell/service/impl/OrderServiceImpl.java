@@ -16,6 +16,7 @@ import com.xue.sell.repository.OrderMasterRepository;
 import com.xue.sell.service.OrderService;
 import com.xue.sell.service.PayService;
 import com.xue.sell.service.ProductInfoService;
+import com.xue.sell.service.PushWechatMessage;
 import com.xue.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -50,6 +51,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     PayService payService;
+
+    @Autowired
+    private PushWechatMessage pushWechatMessage;
 
     @Override
     @Transactional
@@ -171,16 +175,18 @@ public class OrderServiceImpl implements OrderService {
             log.error("【完结订单】 订单状态不正确, orderId={} ,orderStatus={}",orderDTO.getOrderId(),orderDTO.getOrderStatus());
             throw new OrderException(ResultEnum.ORDER_STATUS_ERROR);
         }
+        //2.修改订单状态
         orderDTO.setOrderStatus(OrderStatusEnum.FINISHED.getCode());
         OrderMaster orderMaster = new OrderMaster();
         BeanUtils.copyProperties(orderDTO,orderMaster);
-
         OrderMaster updateResult = orderMasterRepository.save(orderMaster);
         if(updateResult == null){
             log.error("【完结订单】 更新失败 orderMaster={}",orderMaster);
             throw new OrderException(ResultEnum.ORDER_UPDATE_FAIL);
         }
-        //2.修改订单状态
+
+        //TODO 推送微信模板消息
+//        pushWechatMessage.orderStatus(orderDTO);
         return orderDTO;
     }
 
