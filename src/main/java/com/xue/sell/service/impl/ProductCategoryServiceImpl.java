@@ -42,7 +42,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         try {
             result = repository.save(productCategory);
         }catch (Exception e){
-            throw new CategoryException(ResultEnum.INNER_ERROR);
+            throw new CategoryException(ResultEnum.SAVE_ERROR);
         }
         return result;
     }

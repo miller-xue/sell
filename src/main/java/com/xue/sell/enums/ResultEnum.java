@@ -46,7 +46,9 @@ public enum ResultEnum {
     WECHAT_OPEN_ERROR(25, "微信开放平台账号方面错误"),
 
     LOGIN_FAIL(26,"登陆失败,登陆信息不正确"),
-    LOGOUT_SUCCESS(27,"登出成功")
+
+    LOGOUT_SUCCESS(27,"登出成功"),
+    SAVE_ERROR(28,"保存失败")
     ;
 
     private Integer code;

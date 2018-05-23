@@ -6,7 +6,9 @@ package com.xue.sell.constant;
  */
 public interface CookieConstant {
 
+    /*名称*/
     String TOKEN = "token";
 
+    /*过期时间*/
     Integer EXPIRE = 7200;
 }

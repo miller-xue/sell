@@ -56,7 +56,7 @@ public class WechatAccountConfig {
     private String notifyUrl;
 
     /**
-     * 微信模板Id
+     * 微信模板Ids
      */
     private Map<String,String> templateId;
 }

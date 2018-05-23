@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    include: wechat,sell
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
@@ -14,20 +16,3 @@ spring:
 
 server:
   context-path: /sell
-wechat:
-  mpAppId: wxcee54310cc1ea263
-  mpAppSecret: 0368320d1e22b690a490ea3d9914fa4b
-  openAppId: wxcee54310cc1ea263
-  openAppSecret: 0368320d1e22b690a490ea3d9914fa4b
-  mchId: 231
-  mchKey: 213
-  keyPath: 213
-  notifyUrl: http:/dwadxxx.com.xxx/sell/pay/notify
-  templateId:
-    orderStatus: uBM9O0F6MTGc8PZLmrDWBr6BDr2E-wolQ5C7JyskgY0
-
-projectUrl:
-  wechatMpAuthorize: http://fibkij.natappfree.cc
-  wechatOpenAuthorize: fibkij.natappfree.cc
-  sell: http://fibkij.natappfree.cc/sell/
-

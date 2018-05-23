@@ -1,10 +1,12 @@
 package com.xue.sell.exception;
 
 import com.xue.sell.enums.ResultEnum;
+import lombok.Getter;
 
 /**
  * Created by miller on 2018/5/6
  */
+@Getter
 public class SellException extends RuntimeException {
     private Integer code;
 
@@ -16,8 +18,5 @@ public class SellException extends RuntimeException {
     public SellException(Integer code,String message){
         super(message);
         this.code = code;
-    }
-    public Integer getCode() {
-        return code;
     }
 }

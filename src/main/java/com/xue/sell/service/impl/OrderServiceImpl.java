@@ -13,10 +13,7 @@ import com.xue.sell.pojo.OrderMaster;
 import com.xue.sell.pojo.ProductInfo;
 import com.xue.sell.repository.OrderDetailRepository;
 import com.xue.sell.repository.OrderMasterRepository;
-import com.xue.sell.service.OrderService;
-import com.xue.sell.service.PayService;
-import com.xue.sell.service.ProductInfoService;
-import com.xue.sell.service.PushWechatMessage;
+import com.xue.sell.service.*;
 import com.xue.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -54,6 +51,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private PushWechatMessage pushWechatMessage;
+
+    @Autowired
+    private WebScoket webScoket;
 
     @Override
     @Transactional
@@ -95,8 +95,9 @@ public class OrderServiceImpl implements OrderService {
                                     .collect(Collectors.toList());
         productService.decreaseStock(cartDTOList);
 
+        //TODO webScoket 发送消息
+        webScoket.sendMessage("有新的订单");
 
-        //TODO 返回值不对。需要等需求在去操作返回值
         return orderDTO;
     }
 

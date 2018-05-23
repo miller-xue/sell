@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * 发送微信模板消息实现类
  * Created by miller on 2018/5/22
  */
 @Service
