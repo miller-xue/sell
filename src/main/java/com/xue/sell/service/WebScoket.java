@@ -27,7 +27,7 @@ public class WebScoket {
     public void onOpen(Session session){
         this.session = session;
         webScoketSet.add(this);
-      log.info("【webSocket消息】 有新的连接, 总数:{}",webScoketSet.size());
+        log.info("【webSocket消息】 有新的连接, 总数:{}",webScoketSet.size());
     }
 
     @OnClose

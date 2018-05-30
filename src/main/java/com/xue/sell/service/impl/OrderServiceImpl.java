@@ -96,7 +96,7 @@ public class OrderServiceImpl implements OrderService {
         productService.decreaseStock(cartDTOList);
 
         //TODO webScoket 发送消息
-        webScoket.sendMessage("有新的订单");
+        webScoket.sendMessage(orderDTO.getOrderId());
 
         return orderDTO;
     }

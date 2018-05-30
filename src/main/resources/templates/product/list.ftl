@@ -93,35 +93,5 @@
         </div>
     </div>
 </div>
-<script>
-    var webSocket = null;
-    if('WebSocket' in window){
-        webSocket = new WebSocket('ws://7aqe8q.natappfree.cc/sell/webSocket');
-    }else {
-        alert("该浏览器不支持webSocket")
-    }
-
-    webSocket.onopen = function (event) {
-        console.log('建立连接')
-    };
-
-    webSocket.onclose = function (event) {
-        console.log('连接关闭')
-    };
-
-    webSocket.onmessage = function (event) {
-        console.log("收到消息:" + event.data);
-        // TODO 弹窗提醒,播放音乐
-    };
-
-    webSocket.onerror = function (event) {
-        alert('webSocket通信发生错误');
-    };
-
-    window.onbeforeunload = function () {
-        webSocket.close();
-    };
-
-</script>
 </body>
 </html>
