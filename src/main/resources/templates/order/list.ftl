@@ -117,7 +117,7 @@
     <script>
         var websocket = null;
         if('WebSocket' in window){
-            websocket = new WebSocket('ws://k83279.natappfree.cc/sell/webSocket');
+            websocket = new WebSocket('ws://chs2sw.natappfree.cc/sell/webSocket');
         }else {
             alert("该浏览器不支持webSocket")
         }

@@ -16,3 +16,10 @@ spring:
 
 server:
   context-path: /sell
+logging:
+  level:
+    com.xue.sell.pojo.mapper: trace
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
