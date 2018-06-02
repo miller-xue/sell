@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -122,6 +124,8 @@ public class SellerProductController {
      * @param model
      * @return
      */
+//    @CachePut(cacheNames = "product",key = "123")
+    @CacheEvict(cacheNames = "product")
     @PostMapping("/save")
     public String save(@Valid ProductForm productForm,
                        BindingResult bindingResult,

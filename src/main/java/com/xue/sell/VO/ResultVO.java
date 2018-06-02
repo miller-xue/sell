@@ -2,12 +2,16 @@ package com.xue.sell.VO;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * http请求返回给最外层对象
  * Created by miller on 2018/5/5
  */
 @Data
-public class ResultVO<T> {
+public class ResultVO<T> implements Serializable {
+
+    private static final long serialVersionUID = -7030237385589807166L;
 
     /* 错误码 */
     private Integer code;

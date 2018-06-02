@@ -8,6 +8,7 @@ import com.xue.sell.pojo.ProductInfo;
 import com.xue.sell.repository.ProductInfoRepository;
 import com.xue.sell.service.ProductInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.List;
  * Created by miller on 2018/5/5
  */
 @Service
+//@CacheConfig(cacheNames = "product")
 public class ProductInfoServiceImpl implements ProductInfoService {
 
     @Autowired
